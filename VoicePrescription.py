@@ -28,18 +28,18 @@ from send_mail import upload
 
 def listen():
 	#Microphone
-	r = sr.Recognizer()
-	with sr.Microphone() as source:
-		print("Alert", "Start Speaking")
-		audio = r.listen(source, timeout = 4)
+	# r = sr.Recognizer()
+	# with sr.Microphone() as source:
+	# 	print("Alert", "Start Speaking")
+	# 	audio = r.listen(source, timeout = 4)
 	
 	#test voice
-	# r = sr.Recognizer()
-	# try:
-	# 	with sr.AudioFile('test-voice.wav') as source:
-	# 		audio = r.listen(source)
-	# except:
-	# 	print("ERROR","Could not open file, please select .wav file")
+	r = sr.Recognizer()
+	try:
+		with sr.AudioFile('test-voice.wav') as source:
+			audio = r.listen(source)
+	except:
+		print("ERROR","Could not open file, please select .wav file")
 
 
 	# Convert audio to text
