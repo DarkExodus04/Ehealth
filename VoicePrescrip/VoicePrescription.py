@@ -1,8 +1,8 @@
 import speech_recognition as sr
 import os
-from extract_text import extract
-from create_document import create
-from send_mail import upload
+from VoicePrescrip.extract_text import extract
+from VoicePrescrip.create_document import create
+from VoicePrescrip.send_mail import upload
 
 
 #send mail
@@ -26,7 +26,7 @@ from send_mail import upload
 # 	except:
 # 		print("ERROR", "Could not open file")
 
-def listen():
+def listen(text):
 	#Microphone
 	# r = sr.Recognizer()
 	# with sr.Microphone() as source:
@@ -34,20 +34,20 @@ def listen():
 	# 	audio = r.listen(source, timeout = 4)
 	
 	#test voice
-	r = sr.Recognizer()
-	try:
-		with sr.AudioFile('test-voice.wav') as source:
-			audio = r.listen(source)
-	except:
-		print("ERROR","Could not open file, please select .wav file")
+	# r = sr.Recognizer()
+	# try:
+	# 	with sr.AudioFile('test-voice.wav') as source:
+	# 		audio = r.listen(source)
+	# except:
+	# 	print("ERROR","Could not open file, please select .wav file")
 
 
 	# Convert audio to text
-	try:
-		text = r.recognize_google(audio)
-		print("Alert", "Converted Text: {}".format(text))
-	except:
-		print("ERROR","Could not recognize the voice")
+	# try:
+	# 	text = r.recognize_google(audio)
+	# 	print("Alert", "Converted Text: {}".format(text))
+	# except:
+	# 	print("ERROR","Could not recognize the voice")
 	
 	# Extract text
 	try:
@@ -72,6 +72,5 @@ def listen():
 	# 	verify(name)
 	# except:
 	# 	print("ERROR","Could not open file")
-
-
-listen()
+	d = {'name': name, 'age': age, 'date': date, 'tablet' : tablet}
+	return d

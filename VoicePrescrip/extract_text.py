@@ -1,6 +1,6 @@
 from datetime import date as D
-from get_name import get_human_names, get_age
-from extract_details import extract_details
+from VoicePrescrip.get_name import get_human_names, get_age
+from VoicePrescrip.extract_details import extract_details
 
 def extract(text):
     name = " ".join(get_human_names(text))
