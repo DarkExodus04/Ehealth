@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% block navbar %}
+<ul class="nav navbar-nav navbar-right">
+  <li><a href="{{url_for('doctorregister')}}"><span class="glyphicon glyphicon-user"></span> Doctor</a></li>
+  <li><a href="{{url_for('patientregister')}}"><span class="glyphicon glyphicon-user"></span> Patient</a></li>
+</ul>
+{% endblock %}
+
 {% block content %}
 <div class="card-wrapper">
 
