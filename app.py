@@ -39,7 +39,7 @@ def pdashboard():
   return render_template('pdashboard.html')
 
 @app.route('/ddashboard/')
-@login_required
+# @login_required
 def ddashboard():
   return render_template('ddashboard.html')
 
