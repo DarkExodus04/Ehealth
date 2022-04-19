@@ -8,30 +8,68 @@
 {% endblock %}
 
 {% block content %}
-  <div class="card-wrapper">
+<div class="card-wrapper">
 
-    <div class="card">
+  <div class="card">
 
-      <h1 class="center">Dashboard</h1>
-      <p class="center">You are currently logged in.</p>
+    <!-- <h1 class="center">Dashboard</h1> -->
+    <!-- <p class="center">You are currently logged in.</p> -->
 
-      <div class="center">
+    <!-- <div class="center">
         <a href="/user/signout" class="btn btn--secondary">Sign Out</a>
-      </div>
-    
-    </div>
+      </div> -->
 
-    <div class="card">
-
-      <h2 class="center">Your Info</h2>
-
-      <p>
-        <strong>ID:</strong> {{ session['user']['_id'] }}<br>
-        <strong>Name:</strong> {{ session['user']['name'] }}<br>
-        <strong>Email:</strong> {{ session['user']['email'] }}
-      </p>
-    
-    </div>
-  
+    <h2>Available Doctors:</h2>
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Specialization</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Rahul</td>
+          <td>rahul@doc.com</td>
+          <td>MBBS</td>
+        </tr>
+        
+        <tr>
+          <th scope="row">2</th>
+          <td>Jack</td>
+          <td>jack@doc.com</td>
+          <td>ENT</td>
+        </tr>
+        
+        <tr>
+          <th scope="row">3</th>
+          <td>Bose</td>
+          <td>bose@doc.com</td>
+          <td>MBBS</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+  <div class="card">
+
+    <h2 class="center">Inform Doctors</h2>
+
+    <p>
+      <!-- <strong>ID:</strong> {{ session['user']['_id'] }}<br> -->
+      <strong>Name:</strong> {{ session['user']['name'] }}<br>
+      <strong>Email:</strong> {{ session['user']['email'] }}<br>
+      <strong>Age:</strong> {{ session['user']['age'] }}
+    </p>
+
+    <h4 class="mt-5">Parameters:</h4>
+    <p><strong>Oxygen: </strong>93<br>
+          <strong>BPM: </strong>75<br>
+          <strong>Temperature: </strong>25<br>
+          <strong>ECG: </strong>1500</p>
+  </div>
+</div>
 {% endblock %}

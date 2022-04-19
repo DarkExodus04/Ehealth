@@ -1,6 +1,6 @@
 from flask import Flask, render_template, session, redirect,request
 from functools import wraps
-import pymongo
+import pymongo,os
 from VoicePrescrip.VoicePrescription import listen
 import speech_recognition as sr
 
@@ -39,7 +39,7 @@ def pdashboard():
   return render_template('pdashboard.html')
 
 @app.route('/ddashboard/')
-# @login_required
+@login_required
 def ddashboard():
   return render_template('ddashboard.html')
 
@@ -72,3 +72,8 @@ def voicepres():
 @app.route('/doctorregister')
 def doctorregister():
   return render_template('doctorregister.html')
+
+
+if __name__ == '__main__':
+  os.environ['FLASK_ENV'] =  development
+  app.run(debug = True)
