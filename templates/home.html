@@ -1,26 +1,43 @@
-{% extends "base.html" %}
-
-{% block navbar %}
+{% extends "base.html" %} {% block navbar %}
 <ul class="nav navbar-nav navbar-right">
-  <li><a href="{{url_for('doctorregister')}}"><span class="glyphicon glyphicon-user"></span> Doctor</a></li>
-  <li><a href="{{url_for('patientregister')}}"><span class="glyphicon glyphicon-user"></span> Patient</a></li>
+  <a class="nav-link" href="{{url_for('doctorregister')}}"
+    ><span class="glyphicon glyphicon-user"></span>Doctors</a
+  >
+  <a class="nav-link" href="{{url_for('patientregister')}}"
+    ><span class="glyphicon glyphicon-user"></span>Patients</a
+  >
 </ul>
+{% endblock %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="card-wrapper">
+      <div class="card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8CNRs1eWOp93rOMbBXfz20cOmJOZ1J2US2w&usqp=CAU"
+          class="card-img-top"
+        />
+        <div class="class-body">
+          <h4>
+            <a class="card-text" href="{{url_for('patientregister')}}"
+              >Patients</a
+            >
+          </h4>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8CNRs1eWOp93rOMbBXfz20cOmJOZ1J2US2w&usqp=CAU"
+          class="card-img-top"
+        />
+        <div class="class-body">
+          <h4>
+            <a class="card-text" href="{{url_for('doctorregister')}}"
+              >Doctors</a
+            >
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
-
-{% block content %}
-<div class="card-wrapper">
-
-    <div class="card">
-
-      <a class="center" href = "{{url_for('patientregister')}}">Patients</a>
-      
-    </div>
-
-    <div class="card">
-
-      <a class="center" href = "{{url_for('doctorregister')}}">Doctors</a>
-
-      
-    </div>
-
-    {% endblock %}

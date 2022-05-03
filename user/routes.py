@@ -14,6 +14,9 @@ def signout():
 def login():
   return User().login()
 
+@app.route('/user/symptom', methods=['POST'])
+def symptom():
+  return User().symptoms()
 
 @app.route('/doc/signup', methods=['POST'])
 def dsignup():

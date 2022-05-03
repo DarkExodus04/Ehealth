@@ -1,5 +1,4 @@
-$('#signup').submit(function(e) {
-
+$("#signup").submit(function (e) {
   var $form = $(this);
   var $error = $form.find(".error");
   var data = $form.serialize();
@@ -9,19 +8,18 @@ $('#signup').submit(function(e) {
     type: "POST",
     data: data,
     dataType: "json",
-    success: function(resp) {
+    success: function (resp) {
       window.location.href = "/pdashboard/";
     },
-    error: function(resp) {
+    error: function (resp) {
       $error.text(resp.responseJSON.error).removeClass("error--hidden");
-    }
+    },
   });
 
   e.preventDefault();
 });
 
-$('#login').submit(function(e) {
-
+$("#login").submit(function (e) {
   var $form = $(this);
   var $error = $form.find(".error");
   var data = $form.serialize();
@@ -31,19 +29,18 @@ $('#login').submit(function(e) {
     type: "POST",
     data: data,
     dataType: "json",
-    success: function(resp) {
+    success: function (resp) {
       window.location.href = "/pdashboard/";
     },
-    error: function(resp) {
+    error: function (resp) {
       $error.text(resp.responseJSON.error).removeClass("error--hidden");
-    }
+    },
   });
 
   e.preventDefault();
 });
 
-$("form[name='doctor-signup']").submit(function(e) {
-
+$("form[name='doctor-signup']").submit(function (e) {
   var $form = $(this);
   var $error = $form.find(".error");
   var data = $form.serialize();
@@ -53,12 +50,12 @@ $("form[name='doctor-signup']").submit(function(e) {
     type: "POST",
     data: data,
     dataType: "json",
-    success: function(resp) {
+    success: function (resp) {
       window.location.href = "/ddashboard/";
     },
-    error: function(resp) {
+    error: function (resp) {
       $error.text(resp.responseJSON.error).removeClass("error--hidden");
-    }
+    },
   });
 
   e.preventDefault();

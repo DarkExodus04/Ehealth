@@ -1,0 +1,42 @@
+{% block content %}
+
+<div class="card">
+
+    <h1 class="center">Your Parameters</h2>
+    <p><strong>Oxygen: </strong>93<br>
+          <strong>BPM: </strong>75<br>
+          <strong>Temperature: </strong>25<br>
+          <strong>ECG: </strong>1500</p>
+  </div>
+
+<div class="card">
+
+    <h1 class="center">Enter your Symptoms</h1>
+
+    <form action="{{url_for('symptom')}}" method="post" name="symptom_form" id = "symptom">
+        <label for="doctors">Choose a Doctor:</label>
+
+        <select name="doctor" id="doctor">
+          {%for doc in doctors%}
+        <option value="{{doc['name']}}">{{doc['name']}}</option>
+        {%endfor%}
+        </select>
+
+      <label for="symptom 1">Symptom 1</label>
+      <input type="text" name="s1" class="field" required>
+
+      <label for="symptom 2">Symptom 2</label>
+      <input type="text" name="s2" class="field">
+
+      <label for="symptom 3">Symptom 3</label>
+      <input type="text" name="s3" class="field">
+
+      <p class="error error--hidden"></p>
+
+      <input type="submit" value="Send" class="btn">
+    
+    </form>
+    
+  </div>
+
+{% endblock %}

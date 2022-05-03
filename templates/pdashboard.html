@@ -1,17 +1,15 @@
-{% extends "base.html" %}
-
-{% block navbar %}
+{% extends "base.html" %} {% block navbar %}
 <ul class="nav navbar-nav navbar-right">
-  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-  <li><a href="{{url_for('signout')}}"><span class="glyphicon glyphicon-log-out"></span> Signout</a></li>
+  <a class="nav-link" href="#"
+    ><span class="glyphicon glyphicon-user"></span>Profile</a
+  >
+  <a class="nav-link" href="{{url_for('signout')}}"
+    ><span class="glyphicon glyphicon-user"></span>Signout</a
+  >
 </ul>
-{% endblock %}
-
-{% block content %}
+{% endblock %} {% block content %}
 <div class="card-wrapper">
-
   <div class="card">
-
     <!-- <h1 class="center">Dashboard</h1> -->
     <!-- <p class="center">You are currently logged in.</p> -->
 
@@ -26,50 +24,33 @@
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Email</th>
-          <th scope="col">Specialization</th>
+          <th scope="col">Department</th>
         </tr>
       </thead>
       <tbody>
+        {%for doc in doctors:%}
         <tr>
           <th scope="row">1</th>
-          <td>Rahul</td>
-          <td>rahul@doc.com</td>
+          <td>{{doc['name']}}</td>
+          <td>{{doc['email']}}</td>
           <td>MBBS</td>
         </tr>
-        
-        <tr>
-          <th scope="row">2</th>
-          <td>Jack</td>
-          <td>jack@doc.com</td>
-          <td>ENT</td>
-        </tr>
-        
-        <tr>
-          <th scope="row">3</th>
-          <td>Bose</td>
-          <td>bose@doc.com</td>
-          <td>MBBS</td>
-        </tr>
+        {%endfor%}
       </tbody>
     </table>
   </div>
 
   <div class="card">
-
     <h2 class="center">Inform Doctors</h2>
 
-    <p>
-      <!-- <strong>ID:</strong> {{ session['user']['_id'] }}<br> -->
-      <strong>Name:</strong> {{ session['user']['name'] }}<br>
-      <strong>Email:</strong> {{ session['user']['email'] }}<br>
-      <strong>Age:</strong> {{ session['user']['age'] }}
-    </p>
-
     <h4 class="mt-5">Parameters:</h4>
-    <p><strong>Oxygen: </strong>93<br>
-          <strong>BPM: </strong>75<br>
-          <strong>Temperature: </strong>25<br>
-          <strong>ECG: </strong>1500</p>
+    <p>
+      <strong>Oxygen: </strong>93<br />
+      <strong>BPM: </strong>75<br />
+      <strong>Temperature: </strong>25<br />
+      <strong>ECG: </strong>1500
+    </p>
+    <a class="center" href="{{url_for('symptoms')}}">Ask Advice</a>
   </div>
 </div>
 {% endblock %}

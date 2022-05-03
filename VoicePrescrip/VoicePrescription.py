@@ -50,6 +50,7 @@ def listen(text):
 	# 	print("ERROR","Could not recognize the voice")
 	
 	# Extract text
+	text = '''Patient name is Nathan. Patient id is 2000. Diagnosis 1 viral fever. Take Crocin 250 mg injection before lunch after dinner for 2 days. Bronkotab EX tablet after breakfast for 17 days. Take Cefizox injection before dinner for 5 days. symptom 1 weakness. Advise 1 to use warm clothes.stop'''
 	try:
 		name, age, date, tablet = extract(text)
 

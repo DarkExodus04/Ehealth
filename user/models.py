@@ -50,7 +50,27 @@ class User:
     
     return jsonify({ "error": "Invalid login credentials" }), 401
 
+  def symptoms(self):
+    advice = {
+      "name" : session['user']['name'],
+      "_id" : session['user']['_id'],
+      "Advice": True,
+      "Doctor" : request.form.get('doctor'),
+      "Symptom1": request.form.get('s1'),
+      "Symptom2": request.form.get('s2'),
+      "Symptom3": request.form.get('s3')
+    }
 
+    d = db.doctors.find_one({
+      "name": advice['Doctor']
+    })
+    advice['d_id'] = d['_id']
+    if db.questions.insert_one(advice):
+      return redirect('/pdashboard')
+
+# get advices//precription from doctor
+  def advices(self):
+    pass 
 
 class Doctor:
 
@@ -58,7 +78,7 @@ class Doctor:
     del doc['password']
     session['logged_in'] = True
     session['doc'] = doc
-    return render_template('ddashboard.html', request = 'POST')
+    return redirect('/ddashboard/')
 
   def signup(self):
     print(request.form)

@@ -2,31 +2,51 @@
 
 {% block navbar %}
 <ul class="nav navbar-nav navbar-right">
-  <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-  <li><a href="{{url_for('dsignout')}}"><span class="glyphicon glyphicon-log-out></span> Signout</a></li>
+  <a class="nav-link" href="#"
+    ><span class="glyphicon glyphicon-user"></span>Profile</a
+  >
+  <a class="nav-link" href="{{url_for('signout')}}"
+    ><span class="glyphicon glyphicon-user"></span>Signout</a
+  >
 </ul>
 {% endblock %}
 
 {% block content %}
-<div class="card-wrapper">
-
-  <div class="card">
-
     <h1 class="center">Doctor Dashboard</h1>
-    <p class="center">You are currently logged in.</p>
-
-    <div class="center">
-      <a href="/doc/signout" class="btn btn--secondary">Sign Out</a>
-    </div>
-  
-  </div>
-
-  <div class="center">
-    <a href="{{url_for('voicepres')}}" class="btn btn--secondary">Give Prescription</a>
-  </div>
-
 </div>
+{%for p in patients:%}
+<div class="card">
+  <div class="card-body">
+    <h5 id = "np" class="card-title">{{p['name']}}</h5>
+    <p class="card-text">Age: {{p['age']}}</p>
+    <p class="card-text">Advice: {{'Yes' if p['Advice'] else 'No'}}</p>
+    <a id = "patient" href="{{ url_for('voicepres', name=p['name'],age = p['age'],s1 = p['Symptom1'],s2 = p['Symptom2'],s3 = p['Symptom3'],id = p['_id'])}}" class="btn btn--secondary"><button type="button" class="btn btn-primary">Show Profile</button></a>
+  </div>
+</div>
+{%endfor%}
 
+
+<div class="card" d-none>
+  <h2>Your Patients:</h2>
+  <table class="table table-striped table-dark">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Age</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%for p in patients:%}
+      <tr>
+        <th scope="row">1</th>
+        <td>{{p['name']}}</td>
+        <td>{{p['age']}}</td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
 
   <div class="card">
 
@@ -41,4 +61,5 @@
   </div>
 
 </div>
+<script src="/static/js/microphone.js"></script>
 {% endblock %}
