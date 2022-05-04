@@ -65,7 +65,7 @@ class User:
       "name": advice['Doctor']
     })
     advice['d_id'] = d['_id']
-    if db.questions.insert_one(advice):
+    if db.questions.update_one({'_id': advice['_id']},{"$set": {"_id":advice['_id']}},upsert=True):
       return redirect('/pdashboard')
 
 # get advices//precription from doctor

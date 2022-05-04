@@ -13,16 +13,26 @@ def prescription(inputPrescription):
 	top_words = set(stopwords.words('english')) 
 
 
-	# inputPrescription = '''Patient name is kavita sultanpure . Patient id is 1405. Diagnosis 1 viral fever. Take CEFIZOX 250 mg Injection before lunch after dinner for 2 days. Take Bronkotab EX Tablet after breakfast for 17 days. Take Cefizox 1 mg Injection before dinner for 5 days. Symptom 1 Weakness. Symptom 2 Cough. Advice 1 take steam. Advice 2 use warm cloths. stop'''
-	inputPrescription = '''diagnosis viral fever. take crocin 250 mg injection before lunch after lunch for 5 days. Take broncoTab tablet after dinner for 17 days. Take cefizox 1 mg injection before dinner for 5 days. Advice 1 take steam. Advice 2 use warm cloths. stop'''
-	words = inputPrescription.split()
-	for i in range(len(words)):
-		if words[i] == 'patient' or words[i] == 'diagnosis' or words[i] == 'advice' or words[i] == 'symptom':
-			words[i] = words[i].capitalize()
+	# inputPrescription = '''Diagnosis 1 pneumonia. Take Crocin 250 mg Injection before lunch after dinner for 2 days. Take Azithromycin after breakfast for 17 days. Take Salvin cold 1 mg Injection before dinner for 5 days. Advice 1 take steam. Advice 2 use warm cloths. stop'''
+	inputPrescription = '''Diagnosis viral fever. take crocin 250 mg injection before lunch after lunch for 5 days. Take broncoTab tablet after dinner for 17 days. Take cefizox 1 mg injection before dinner for 5 days. Advice 1 take steam. Advice 2 use warm cloths. stop'''
+	# words = inputPrescription.split()
+	# new_words = []
+	# for i in range(len(words)):
+
+	# 	if words[i] == "take" or words[i] == "advice" or words[i] == "stop":
+	# 	# 	new_words.append('. ')
+	# 	# new_words.append(words[i])
+	# 		words[i-1] = words[i-1] + '.'
+
 	inputPrescription = ' '.join(map(str, words))
 	print(inputPrescription)
+
+	# for i in range(len(words)):
+	# 	if words[i] == 'patient' or words[i] == 'diagnosis' or words[i] == 'advice' or words[i] == 'symptom':
+	# 		words[i] = words[i].capitalize()
+	# inputPrescription = ' '.join(map(str, words))
 	# link to stanford engine and jar
-	entity_tagger=StanfordNERTagger('C:/Users/noron/Downloads/NLP-20220429T143205Z-001/NLP/stanford-ner-tagger/v3_ner_model.ser.gz', 'C:/Users/noron/Downloads/NLP-20220429T143205Z-001/NLP/stanford-ner-tagger/' + 'stanford-ner-3.9.2.jar')
+	entity_tagger=StanfordNERTagger('C:/Nathan/Projects/GitHub/Ehealth/stanford-ner-tagger/v3_ner_model.ser.gz', 'C:/Nathan/Projects/GitHub/Ehealth/stanford-ner-tagger/' + 'stanford-ner-3.9.2.jar')
 
 	#tokenize the sentences
 	tokens = nltk.word_tokenize(inputPrescription)
@@ -74,9 +84,12 @@ def prescription(inputPrescription):
 			#found take and adding name of med after take till TIM tag
 			TIMi = i+1
 			medicinename = ""
-			while data[TIMi+1][1] != 'TIM':
-				medicinename += data[TIMi][0] + " "
-				TIMi += 1
+			try:
+				while data[TIMi+1][1] != 'TIM':
+					medicinename += data[TIMi][0] + " "
+					TIMi += 1
+			except:
+				break
 			medicinename += data[TIMi][0]
 			Medicines.append(medicinename)
 			i = TIMi

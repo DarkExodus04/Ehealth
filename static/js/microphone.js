@@ -40,11 +40,12 @@ if ("webkitSpeechRecognition" in window) {
 
   document.querySelector("#submit").onclick = async () => {
     let diag = document.querySelector("#final").innerHTML;
-    let dos = document.querySelector("#dfinal").innerHTML;
-    let advice = document.querySelector("#afinal").innerHTML;
+    // let dos = document.querySelector("#dfinal").innerHTML;
+    // let advice = document.querySelector("#afinal").innerHTML;
     const requestOptions = {
       method: "POST",
-      body: JSON.stringify([diag, dos, advice]),
+      // body: JSON.stringify([diag, dos, advice]),
+      body: JSON.stringify([diag]),
     };
     await fetch("/voicepres/", requestOptions);
     location.href = `/verify${generateQueryString()}`;
@@ -52,6 +53,11 @@ if ("webkitSpeechRecognition" in window) {
 
   document.querySelector("#stop").onclick = () => {
     speechRecognition.stop();
+  };
+
+  document.querySelector("#clear").onclick = () => {
+    speechRecognition.stop();
+    final_transcript = "";
   };
 } else {
   console.log("Speech Recognition Not Available");

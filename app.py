@@ -80,15 +80,16 @@ def ddashboard():
 
 #     try:
 #       text = r.recognize_google(audio1)
+#       print(text)
 #       print("Alert", "Converted Text: {}".format(text))
 #     except:
 #       print("ERROR","Could not recognize the voice")
       
 #     values = listen(text)
 #     print(values)
-#     return render_template('voicepres.html', request="POST", values = values)
+#     return render_template('try.html', request="POST", values = values)
 #   else:
-#     return render_template("voicepres.html")
+#     return render_template("try.html")
 
 @app.route('/voicepres/', methods=['POST', 'GET'])
 def voicepres():
@@ -96,9 +97,20 @@ def voicepres():
   patientid = args.get('id')
   parameters = db.parameters.find_one({'_id':patientid},{'_id':0,'password': 0})
   if request.method == "POST":
-    f = request.data.decode("utf-8")
-    js = json.loads(f)
-    sentence = '. '.join(map(str,js))+'.'
+    # f = request.data.decode("utf-8")
+    # js = json.loads(f)
+    file = request.files['audio_data']
+    if file.filename == "":
+      print('u')
+      return redirect(request.url)
+
+    if file:
+      recognizer = sr.Recognizer()
+      audioFile = sr.AudioFile(file)
+      with audioFile as source:
+          data = recognizer.record(source)
+      sentence = recognizer.recognize_google(data, key=None)
+    # sentence = '. '.join(map(str,js))+'.'
     # values = listen(f)
     try:
       print("Alert", "Converted Text: {}".format(sentence))
@@ -107,9 +119,34 @@ def voicepres():
     pres = prescription(sentence)
     session['prescription'] = pres
 
-    return render_template('voicepres.html', request="POST", parameters = parameters)
+    return render_template('voicepres.html', request="POST", parameters = parameters, transcript = sentence)
   else:
     return render_template("voicepres.html",parameters = parameters)
+
+# @app.route('/voicepres/', methods=['POST', 'GET'])
+# def voicepres():
+#   transcript = ""
+#   if request.method == "POST":
+#     print("FORM DATA RECEIVED")
+#     file = request.files['audio_data']
+
+#     # if "file" not in request.files:
+#     #   print('ua')
+#     #   return redirect(request.url)
+
+    
+#     if file.filename == "":
+#       print('u')
+#       return redirect(request.url)
+
+#     if file:
+#       recognizer = sr.Recognizer()
+#       audioFile = sr.AudioFile(file)
+#       with audioFile as source:
+#           data = recognizer.record(source)
+#       transcript = recognizer.recognize_google(data, key=None)
+#   print(transcript)
+#   return render_template('try.html', transcript=transcript)
 
 @app.route('/verify/')
 def verify():
@@ -117,8 +154,8 @@ def verify():
   print(pres)
   return render_template('verify.html',pres = pres, s = "checked")
 
-@app.route('/prescription/')
-def prescription():
+@app.route('/fprescription/')
+def fprescription():
   dat = datetime.date.today()
   pres = session.get('prescription',None)
   return render_template('prescription.html',s = 'Dr. Nathan',pres = pres, date = dat)

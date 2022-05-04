@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Speech Recognition in Python</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/try.css') }}"
+    />
+  </head>
+  <body>
+    <h1>Simple Recorder.js demo</h1>
+
+    <div id="controls">
+     <button id="recordButton">Record</button>
+     <button id="pauseButton" disabled>Pause</button>
+     <button id="stopButton" disabled>Stop</button>
+    </div>
+    <div id="formats">Format: start recording to see sample rate</div>
+    <p><strong>Recordings:</strong></p>
+    <ol id="recordingsList"></ol>
+   
+      {% if transcript %}
+      <div id="speechTranscriptContainer">
+        <h1>Transcript</h1>
+        <p id="speechText">{{ transcript }}</p>
+      </div>
+      {% endif %}
+    </div>
+
+     <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+     <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+     <script src="/static/js/try.js"></script>
+ 
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+  </body>
+</html>
