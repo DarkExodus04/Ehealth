@@ -101,7 +101,6 @@ def voicepres():
     # js = json.loads(f)
     file = request.files['audio_data']
     if file.filename == "":
-      print('u')
       return redirect(request.url)
 
     if file:

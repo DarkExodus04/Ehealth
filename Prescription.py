@@ -14,15 +14,19 @@ def prescription(inputPrescription):
 
 
 	# inputPrescription = '''Diagnosis 1 pneumonia. Take Crocin 250 mg Injection before lunch after dinner for 2 days. Take Azithromycin after breakfast for 17 days. Take Salvin cold 1 mg Injection before dinner for 5 days. Advice 1 take steam. Advice 2 use warm cloths. stop'''
-	inputPrescription = '''Diagnosis viral fever. take crocin 250 mg injection before lunch after lunch for 5 days. Take broncoTab tablet after dinner for 17 days. Take cefizox 1 mg injection before dinner for 5 days. Advice 1 take steam. Advice 2 use warm cloths. stop'''
-	# words = inputPrescription.split()
-	# new_words = []
-	# for i in range(len(words)):
-
-	# 	if words[i] == "take" or words[i] == "advice" or words[i] == "stop":
-	# 	# 	new_words.append('. ')
-	# 	# new_words.append(words[i])
-	# 		words[i-1] = words[i-1] + '.'
+	# inputPrescription = '''Diagnosis viral fever. take crocin 250 mg injection before lunch after lunch for 5 days. Take broncoTab tablet after dinner for 17 days. Take cefizox 1 mg injection before dinner for 5 days. Advice 1 take steam. Advice 2 use warm cloths. stop'''
+	words = inputPrescription.split()
+	new_words = []
+	
+	for i in range(len(words)):
+		if words[i] == 'diagnosis':
+			words[i] = 'Diagnosis'
+		if words[i] == 'take':
+			words[i] = 'Take'
+		if words[i] == "Take" or words[i] == "advice" or words[i] == "stop":
+		# 	new_words.append('. ')
+		# new_words.append(words[i])
+			words[i-1] = words[i-1] + '.'
 
 	inputPrescription = ' '.join(map(str, words))
 	print(inputPrescription)

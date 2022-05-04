@@ -38,7 +38,7 @@
  <p><strong>Recordings:</strong></p>
  <ol id="recordingsList"></ol>
 
-   {% if transcript == "" %}
+   {% if transcript %}
    <div id="speechTranscriptContainer">
      <h1>Transcript</h1>
      <p id="final">{{ transcript }}</p>
@@ -49,7 +49,7 @@
 
 
 
-<div
+<!-- <div
   class="p-3"
   style="border: 1px solid gray; height: 50px; border-radius: 8px"
 >
@@ -63,7 +63,7 @@
   <p id="status" class="lead mt-3 text-dark" style="display: none">
     Listening ...
   </p>
-</div>
+</div> -->
 <!-- 
 <h3 class="mt-4 text-dark">Dosage</h3>
 <div
@@ -96,8 +96,8 @@
     Listening ...
   </p>
 </div> -->
-  <button class="btn btn-blue" id="submit">Submit</button></a
->
+  <button onclick = "location.href = `/verify${generateQueryString()}`" class="btn btn-blue" >Submit</button></a>
+  <script src="/static/js/microphone.js"></script>
 <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
 <script src="/static/js/try.js"></script>
 <script>
@@ -107,7 +107,5 @@
   document.getElementById("s3").innerHTML = params.get("s3");
 
   </script>
-<script src="/static/js/dosage.js"></script>
-<script src="/static/js/advice.js"></script>
-<script src="/static/js/microphone.js"></script>
+
 {% endblock %}
