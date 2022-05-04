@@ -53,7 +53,7 @@ class User:
   def symptoms(self):
     advice = {
       "name" : session['user']['name'],
-      "_id" : session['user']['_id'],
+      "p_id" : session['user']['_id'],
       "Advice": True,
       "Doctor" : request.form.get('doctor'),
       "Symptom1": request.form.get('s1'),
@@ -65,7 +65,7 @@ class User:
       "name": advice['Doctor']
     })
     advice['d_id'] = d['_id']
-    if db.questions.update_one({'_id': advice['_id']},{"$set": {"_id":advice['_id']}},upsert=True):
+    if db.questions.insert_one(advice):
       return redirect('/pdashboard')
 
 # get advices//precription from doctor
