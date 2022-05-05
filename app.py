@@ -98,9 +98,11 @@ def ddashboard():
 def voicepres():
   args = request.args
   patientid = args.get('id')
-  print(patientid)
+  doc = session.get('doc',None)
+
   parameters = db.parameters.find_one({'p_id':patientid},{'_id':0})
   if parameters == None:
+    parameters = {}
     parameters['sensors'] = {'Oxygen':"", 'ECG' :"", 'Heartrate': "", 'Temperature': "" }
   if request.method == "POST":
     # f = request.data.decode("utf-8")
@@ -121,10 +123,14 @@ def voicepres():
       print("Alert", "Converted Text: {}".format(sentence))
     except:
       print("ERROR","Could not recognize the voice")
-    pres = prescription(sentence)
-    session['prescription'] = pres
-
-    return render_template('voicepres.html', request="POST", param = parameters['sensors'], transcript = sentence)
+    try:
+      pres = prescription(sentence)
+      pres['p_id'] = patientid
+      pres['d_id'] = doc['_id']
+    except:
+      sentence = 'Error in Converting voice, Please try again'
+    if db.prescription.insert_one(pres):
+      return render_template('voicepres.html', request="POST", param = parameters['sensors'], transcript = sentence)
   else:
     return render_template("voicepres.html",param = parameters['sensors'])
 
@@ -155,7 +161,9 @@ def voicepres():
 
 @app.route('/verify/')
 def verify():
-  pres = session.get('prescription',None)
+  doc = session.get('doc',None)
+  pres =  db.prescription.find_one({'d_id':doc['_id']},{'_id':0})
+  print('a')
   print(pres)
   return render_template('verify.html',pres = pres, s = "checked")
 

@@ -5,8 +5,8 @@ from nltk.tokenize import word_tokenize
 stop_words = set(stopwords.words('english'))
 
 import os
-# java_path = "C:/Program Files/Java/jdk-18.0.1/bin/java.exe"
-# os.environ['JAVAHOME'] = java_path
+java_path = "C:/Program Files/Java/jdk-18.0.1/bin/java.exe"
+os.environ['JAVAHOME'] = java_path
 
 def prescription(inputPrescription):
 # fetching all stops. Can edit all words from corpa of ntlk download  directory(generally home)
@@ -202,15 +202,13 @@ def prescription(inputPrescription):
 
 	print("\n------------------------------------------------------------------------")
 
-	data_json = {"Age": "", "Dose": "","Diagnosis":"","Advice":"","Days":"","Medicines":""}
-	data_json["PatientName"] = patientName
-	data_json["PatientID"] = patientID
-	data_json["Age"] = ""
+	
 	data_json["Medicines"] = Medicines
 	data_json["Dose"] = Dose
 	data_json["Days"] = Days
-	data_json["Symptom"] = Symptom 
 	data_json["Diagnosis"] = Diagnosis
 	data_json["Advice"] = Advice
+	if data_json == None:
+		data_json = {"Age": "", "Dose": "","Diagnosis":"","Advice":"","Days":"","Medicines":""}
 	print(data_json)
 	return data_json
