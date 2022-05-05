@@ -1,0 +1,111 @@
+{% extends "base.html" %} {% block navbar %}
+<ul class="nav navbar-nav navbar-right">
+  <a class="nav-link" href="#"
+    ><span class="glyphicon glyphicon-user"></span>Profile</a
+  >
+  <a class="nav-link" href="{{url_for('signout')}}"
+    ><span class="glyphicon glyphicon-user"></span>Signout</a
+  >
+</ul>
+{% endblock %} {% block content %}
+
+
+<div class="card">
+  <h4 class="mt-5 center">Symptoms:</h4>
+  <p>
+    <strong>1. </strong><span id="s1"></span><br />
+    <strong>2. </strong><span id="s2"></span><br />
+    <strong>3. </strong><span id="s3"></span>
+  </p>
+</div>
+<div class="card">
+  <h4 class="mt-5 center">Parameters:</h4>
+  <p>
+   <strong>Oxygen: </strong>{{param['Oxygen']}}<br>
+      <strong>BPM: </strong>{{param['Heartrate']}}<br>
+      <strong>Temperature: </strong>{{param['Temperature']}}<br>
+      <strong>ECG: </strong>{{param['ECG']}}</p>
+  </p>
+</div>
+<p class="text-muted"><b>Example:</b> Diagnosis viral fever. Take crocin 250 mg injection before lunch after lunch for 5 days. Take broncoTab tablet after dinner for 17 days. Take cefizox 1 mg injection before dinner for 5 days. Advice 1 take steam. Advice 2 use warm cloths. stop</p>
+<h3 class="mt-4 text-dark">Voice Prescription</h3>
+<div id="controls">
+  <button id="recordButton">Record</button>
+  <button id="pauseButton" disabled>Pause</button>
+  <button id="stopButton" disabled>Stop</button>
+ </div>
+ <div id="formats">Format: start recording to see sample rate</div>
+ <p><strong>Recordings:</strong></p>
+ <ol id="recordingsList"></ol>
+
+   {% if transcript %}
+   <div id="speechTranscriptContainer">
+     <h1>Transcript</h1>
+     <p id="final">{{ transcript }}</p>
+   </div>
+   {% endif %}
+ </div>
+
+
+
+
+<!-- <div
+  class="p-3"
+  style="border: 1px solid gray; height: 50px; border-radius: 8px"
+>
+  <span contenteditable="true" id="final" class="text-dark"></span>
+  <span id="interim" class="text-secondary"></span>
+</div>
+<div class="mt-4">
+  <button class="btn btn-success" id="start">Start</button>
+  <button class="btn btn-danger" id="clear">clear</button>
+  <button class="btn btn-blue" id="stop">Pause</button>
+  <p id="status" class="lead mt-3 text-dark" style="display: none">
+    Listening ...
+  </p>
+</div> -->
+<!-- 
+<h3 class="mt-4 text-dark">Dosage</h3>
+<div
+  class="p-3"
+  style="border: 1px solid gray; height: 50px; border-radius: 8px"
+>
+  <span contenteditable="true" id="dfinal" class="text-dark"></span>
+  <span id="dinterim" class="text-secondary"></span>
+</div>
+<div class="mt-4">
+  <button class="btn btn-success" id="dstart">Start</button>
+  <button class="btn btn-danger" id="dstop">Stop</button>
+  <p id="dstatus" class="lead mt-3 text-dark" style="display: none">
+    Listening ...
+  </p>
+</div>
+
+<h3 class="mt-4 text-dark">Advice</h3>
+<div
+  class="p-3"
+  style="border: 1px solid gray; height: 50px; border-radius: 8px"
+>
+  <span contenteditable="true" id="afinal" class="text-dark"></span>
+  <span id="ainterim" class="text-secondary"></span>
+</div>
+<div class="mt-4">
+  <button class="btn btn-success" id="astart">Start</button>
+  <button class="btn btn-danger" id="astop">Stop</button>
+  <p id="astatus" class="lead mt-3 text-dark" style="display: none">
+    Listening ...
+  </p>
+</div> -->
+  <button onclick = "location.href = `/verify${generateQueryString()}`" class="btn btn-blue" >Submit</button></a>
+  <script src="/static/js/microphone.js"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src="/static/js/try.js"></script>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  document.getElementById("s1").innerHTML = params.get("s1");
+  document.getElementById("s2").innerHTML = params.get("s2");
+  document.getElementById("s3").innerHTML = params.get("s3");
+
+  </script>
+
+{% endblock %}
