@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block navbar %}
+<ul class="nav navbar-nav navbar-right">
+  <a class="nav-link" href="{{url_for('doctorregister')}}"
+    ><span class="glyphicon glyphicon-user"></span>Doctors</a
+  >
+  <a class="nav-link" href="{{url_for('patientregister')}}"
+    ><span class="glyphicon glyphicon-user"></span>Patients</a
+  >
+</ul>
+{% endblock %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="card-wrapper">
+      <div class="card">
+        <img
+          src="https://w7.pngwing.com/pngs/995/1007/png-transparent-patient-illustration-computer-icons-hospital-bed-patient-health-care-icon-patient-free-miscellaneous-blue-angle-thumbnail.png"
+          class="card-img-top"
+        />
+        <div class="class-body">
+          <h4>
+            <a class="card-text center" href="{{url_for('patientregister')}}"
+              >Patients</a
+            >
+          </h4>
+        </div>
+      </div>
+      <div class="card">
+        <img
+          src="https://w7.pngwing.com/pngs/309/992/png-transparent-doctor-illustration-physician-flat-design-icon-doctor-medical-record-material-infographic-people-public-relations-thumbnail.png"
+          class="card-img-top"
+        />
+        <div class="class-body">
+          <h4>
+            <a class="card-text center" href="{{url_for('doctorregister')}}"
+              >Doctors</a
+            >
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

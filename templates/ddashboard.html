@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+<ul class="nav navbar-nav navbar-right">
+  <a class="nav-link" href="#"
+    ><span class="glyphicon glyphicon-user"></span>Profile</a
+  >
+  <a class="nav-link" href="{{url_for('signout')}}"
+    ><span class="glyphicon glyphicon-user"></span>Signout</a
+  >
+</ul>
+{% endblock %}
+
+{% block content %}
+    <h1 class="center">Doctor Dashboard</h1>
+</div>
+<h2>Your Patients:</h2>
+{%for p in patients:%}
+<div class="card">
+  <div class="card-body">
+    <h5 id = "np" class="card-title">{{p['name']}}</h5>
+    <p class="card-text">Age: {{p['age']}}</p>
+    <p class="card-text">Advice: {{'Yes' if p['Advice'] else 'No'}}</p>
+    <a id = "patient" href="{{ url_for('voicepres', name=p['name'],age = p['age'],s1 = p['Symptom1'],s2 = p['Symptom2'],s3 = p['Symptom3'],id = p['_id'])}}"><button type="button" class="btn btn-primary">Show Profile</button></a>
+  </div>
+</div>
+{%endfor%}
+
+ 
+
+  <div class="card">
+
+    <h2 class="center">Your Info</h2>
+
+    <p>
+      <strong>ID:</strong> {{ session['doc']['_id'] }}<br>
+      <strong>Name:</strong> {{ session['doc']['name'] }}<br>
+      <strong>Email:</strong> {{ session['doc']['email'] }}
+    </p>
+  
+  </div>
+
+</div>
+<script src="/static/js/microphone.js"></script>
+{% endblock %}
