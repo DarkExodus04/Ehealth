@@ -11,7 +11,8 @@ app = Flask(__name__)
 app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 
 # Database
-client = pymongo.MongoClient('localhost', 27017)
+# mongodb = "mongodb+srv://ank:anchal@cluster0.cvjbn.mongodb.net/test"
+client = pymongo.MongoClient('localhost',27017)
 db = client.ehealth
 
 # Decorators
@@ -41,14 +42,16 @@ def patientregister():
 def pdashboard():
   user = session.get('user',None)
   doctors = list(db.doctors.find({},{'_id':0,'password': 0}))
-  parameters = db.users.find_one({'_id':user['_id']},{'_id':0,'password': 0})
-  return render_template('pdashboard.html',doctors = doctors, params = parameters)
+  parameters = db.parameters.find_one({'p_id':user['_id']},{'_id':0})
+  return render_template('pdashboard.html',doctors = doctors, param = parameters['sensors'])
 
 @app.route('/symptoms/')
 @login_required
 def symptoms():
+  user = session.get('user',None)
+  parameters = db.parameters.find_one({'p_id':user['_id']},{'_id':0})
   doctors = list(db.doctors.find({},{'_id':0,'password': 0}))
-  return render_template('symptoms.html',doctors = doctors)
+  return render_template('symptoms.html',doctors = doctors,param = parameters['sensors'])
 
 @app.route('/ddashboard/')
 @login_required
@@ -95,7 +98,8 @@ def ddashboard():
 def voicepres():
   args = request.args
   patientid = args.get('id')
-  parameters = db.parameters.find_one({'_id':patientid},{'_id':0,'password': 0})
+  print(patientid)
+  parameters = db.parameters.find_one({'p_id':patientid},{'_id':0})
   if request.method == "POST":
     # f = request.data.decode("utf-8")
     # js = json.loads(f)
@@ -118,9 +122,9 @@ def voicepres():
     pres = prescription(sentence)
     session['prescription'] = pres
 
-    return render_template('voicepres.html', request="POST", parameters = parameters, transcript = sentence)
+    return render_template('voicepres.html', request="POST", param = parameters['sensors'], transcript = sentence)
   else:
-    return render_template("voicepres.html",parameters = parameters)
+    return render_template("voicepres.html",param = parameters['sensors'])
 
 # @app.route('/voicepres/', methods=['POST', 'GET'])
 # def voicepres():

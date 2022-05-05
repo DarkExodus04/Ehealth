@@ -23,7 +23,7 @@ def prescription(inputPrescription):
 			words[i] = 'Diagnosis'
 		if words[i] == 'take':
 			words[i] = 'Take'
-		if words[i] == "Take" or words[i] == "advice" or words[i] == "stop":
+		if words[i] == "Take" or words[i] == "advice"or words[i] == "advise" or words[i] == "stop":
 		# 	new_words.append('. ')
 		# new_words.append(words[i])
 			words[i-1] = words[i-1] + '.'
@@ -202,14 +202,15 @@ def prescription(inputPrescription):
 
 	print("\n------------------------------------------------------------------------")
 
-	data_json = {}
+	data_json = {"Age": "", "Dose": "","Diagnosis":"","Advice":"","Days":"","Medicines":""}
 	data_json["PatientName"] = patientName
 	data_json["PatientID"] = patientID
-	data_json["Age"] = 20
+	data_json["Age"] = ""
 	data_json["Medicines"] = Medicines
 	data_json["Dose"] = Dose
 	data_json["Days"] = Days
 	data_json["Symptom"] = Symptom 
 	data_json["Diagnosis"] = Diagnosis
 	data_json["Advice"] = Advice
+	print(data_json)
 	return data_json
