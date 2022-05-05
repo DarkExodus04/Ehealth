@@ -36,7 +36,7 @@ def prescription(inputPrescription):
 	# 		words[i] = words[i].capitalize()
 	# inputPrescription = ' '.join(map(str, words))
 	# link to stanford engine and jar
-	entity_tagger=StanfordNERTagger('C:/Nathan/Projects/GitHub/Ehealth/stanford-ner-tagger/v3_ner_model.ser.gz', 'C:/Nathan/Projects/GitHub/Ehealth/stanford-ner-tagger/' + 'stanford-ner-3.9.2.jar')
+	entity_tagger=StanfordNERTagger('./stanford-ner-tagger/v3_ner_model.ser.gz', './stanford-ner-tagger/' + 'stanford-ner-3.9.2.jar')
 
 	#tokenize the sentences
 	tokens = nltk.word_tokenize(inputPrescription)
