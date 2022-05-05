@@ -5,8 +5,8 @@ from nltk.tokenize import word_tokenize
 stop_words = set(stopwords.words('english'))
 
 import os
-java_path = "C:/Program Files/Java/jdk-18.0.1/bin/java.exe"
-os.environ['JAVAHOME'] = java_path
+# java_path = "C:/Program Files/Java/jdk-18.0.1/bin/java.exe"
+# os.environ['JAVAHOME'] = java_path
 
 def prescription(inputPrescription):
 # fetching all stops. Can edit all words from corpa of ntlk download  directory(generally home)
