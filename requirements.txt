@@ -34,3 +34,4 @@ zipp==3.8.0
 zopfli==0.2.1
 oauth2client
 SpeechRecognition
+passlib
