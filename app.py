@@ -100,6 +100,8 @@ def voicepres():
   patientid = args.get('id')
   print(patientid)
   parameters = db.parameters.find_one({'p_id':patientid},{'_id':0})
+  if parameters == None:
+    parameters['sensors'] = {'Oxygen':"", 'ECG' :"", 'Heartrate': "", 'Temperature': "" }
   if request.method == "POST":
     # f = request.data.decode("utf-8")
     # js = json.loads(f)
