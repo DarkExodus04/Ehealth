@@ -202,13 +202,13 @@ def prescription(inputPrescription):
 
 	print("\n------------------------------------------------------------------------")
 
-	
+	data_json = {}
 	data_json["Medicines"] = Medicines
 	data_json["Dose"] = Dose
 	data_json["Days"] = Days
 	data_json["Diagnosis"] = Diagnosis
 	data_json["Advice"] = Advice
 	if data_json == None:
-		data_json = {"Age": "", "Dose": "","Diagnosis":"","Advice":"","Days":"","Medicines":""}
+		data_json = { "Dose": "","Diagnosis":"","Advice":"","Days":"","Medicines":""}
 	print(data_json)
 	return data_json

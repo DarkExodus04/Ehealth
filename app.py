@@ -99,7 +99,7 @@ def voicepres():
   args = request.args
   patientid = args.get('id')
   doc = session.get('doc',None)
-
+  db.prescription.delete_many({})
   parameters = db.parameters.find_one({'p_id':patientid},{'_id':0})
   if parameters == None:
     parameters = {}
@@ -119,16 +119,21 @@ def voicepres():
       sentence = recognizer.recognize_google(data, key=None)
     # sentence = '. '.join(map(str,js))+'.'
     # values = listen(f)
-    try:
-      print("Alert", "Converted Text: {}".format(sentence))
-    except:
-      print("ERROR","Could not recognize the voice")
+    # try:
+    #   print("Alert", "Converted Text: {}".format(sentence))
+    # except:
+    #   print("ERROR","Could not recognize the voice")
     try:
       pres = prescription(sentence)
       pres['p_id'] = patientid
       pres['d_id'] = doc['_id']
-    except:
+      print(pres)
+    except Exception as e:
+      print(e)
+      pres = {"Age": "NA", "Dose": "NA","Diagnosis":"NA","Advice":"","Days":"NA","Medicines":"NA"}
+      pres['d_id'] = doc['_id']
       sentence = 'Error in Converting voice, Please try again'
+      print(sentence)
     if db.prescription.insert_one(pres):
       return render_template('voicepres.html', request="POST", param = parameters['sensors'], transcript = sentence)
   else:
@@ -163,15 +168,15 @@ def voicepres():
 def verify():
   doc = session.get('doc',None)
   pres =  db.prescription.find_one({'d_id':doc['_id']},{'_id':0})
-  print('a')
   print(pres)
   return render_template('verify.html',pres = pres, s = "checked")
 
 @app.route('/fprescription/')
 def fprescription():
+  doc = session.get('doc',None)
   dat = datetime.date.today()
-  pres = session.get('prescription',None)
-  return render_template('prescription.html',s = 'Dr. Nathan',pres = pres, date = dat)
+  pres =  db.prescription.find_one({'d_id':doc['_id']},{'_id':0})
+  return render_template('prescription.html',s = doc['name'],pres = pres, date = dat)
 
 @app.route('/doctorregister/')
 def doctorregister():
